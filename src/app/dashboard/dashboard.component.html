@@ -1,0 +1,31 @@
+<h3>Top Heroes</h3>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+<mat-card *ngFor="let hero of heroes" class="col-1-4" >
+    <mat-card-header fxLayout.gt-xs="row" fxLayout.xs="column"  >
+      <mat-card-title >{{hero.data.name}}</mat-card-title>
+      <mat-card-subtitle >{{hero.data.id}}</mat-card-subtitle>
+    </mat-card-header >
+    <img mat-card-image src={{hero.data.img}} >
+    <mat-card-content fxLayout.gt-xs="row" fxLayout.xs="column">
+      <p>
+       {{hero.data.info}}
+      </p>
+    </mat-card-content>
+
+      <button  routerLink="/detail/{{hero.data.id}}" mat-button>EDIT</button>
+      <button  mat-button (click)="deleteHero(hero)">DELETE</button>
+  
+</mat-card>
+</div>
+
+<button color="primary" mat-raised-button routerLink="/add">Add hero</button>
+
+<!-- <div class="grid grid-pad">
+  <a *ngFor="let hero of heroes" class="col-1-4"
+      routerLink="/detail/{{hero.id}}">
+    <div class="module hero">
+      <h4>{{hero.name}}</h4>
+    </div>
+  </a>
+</div> -->

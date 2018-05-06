@@ -1,0 +1,23 @@
+<h2> Add New Hero!</h2>
+  <div>
+    <label>
+      <input [(ngModel)]="hero.id" placeholder="id"/>
+    </label>
+  </div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="hero.name" placeholder="name"/>
+    </label>
+  </div>
+  <div>
+      <label>Info:
+        <input [(ngModel)]="hero.info" placeholder="info"/>
+      </label>
+    </div>
+ <div>
+      <label>Img:
+        <input [(ngModel)]="hero.img" placeholder="imgURL"/>
+      </label>
+ </div>
+
+<button mat-raised-button (click)="goBack()" color="primary"> ADD</button>
