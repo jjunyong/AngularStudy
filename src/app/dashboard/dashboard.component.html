@@ -1,10 +1,10 @@
-<h3>Top Heroes</h3>
+
 
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 <mat-card *ngFor="let hero of heroes" class="col-1-4" >
     <mat-card-header fxLayout.gt-xs="row" fxLayout.xs="column"  >
       <mat-card-title >{{hero.data.name}}</mat-card-title>
-      <mat-card-subtitle >{{hero.data.id}}</mat-card-subtitle>
+      <mat-card-subtitle >{{hero.id}}</mat-card-subtitle>
     </mat-card-header >
     <img mat-card-image src={{hero.data.img}} >
     <mat-card-content fxLayout.gt-xs="row" fxLayout.xs="column">
@@ -13,7 +13,7 @@
       </p>
     </mat-card-content>
 
-      <button  routerLink="/detail/{{hero.data.id}}" mat-button>EDIT</button>
+      <button  routerLink="/detail/{{hero.id}}" mat-button>EDIT</button>
       <button  mat-button (click)="deleteHero(hero)">DELETE</button>
   
 </mat-card>

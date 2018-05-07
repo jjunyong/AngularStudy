@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 // import { HEROES } from './mock-heroes'
 import { Hero } from './hero';
 import { MessageService } from './message.service';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import 'rxjs/add/operator/map'
 
 @Injectable({ providedIn: 'root' })
@@ -13,9 +13,9 @@ export class HeroService {
   
   private HeroCollection: AngularFirestoreCollection<Hero>;
   heroes : Observable<any>;
-  hero : Observable<any>;
+  hero : any
   name : string;
-  id : string;
+  id : number;
   info : string;
   img : string;
 
@@ -24,6 +24,9 @@ export class HeroService {
     private messageService: MessageService) { 
       this.HeroCollection = afs.collection('hero');
     }
+
+
+    // This is how you use snapshotChanges() in Firestore 'Collection'
   getHeroes(): Observable<any> {
     this.messageService.add('HeroService: fetched heroes');
     // this.heroes = this.HeroCollection.valueChanges()
@@ -39,24 +42,24 @@ export class HeroService {
     return this.heroes;
   }
 
-  getHero(id: number): Observable<Hero[]> {
+
+  /* This is how you use snapshotChanges() in firestore 'Document!' */
+  getHero(id: number){
     this.messageService.add(`HeroService: fetched hero id=${id}`);
     // this.heroes = this.afs.collection('hero',ref => ref.where('id','==',id)).valueChanges();
-    this.heroes = this.afs.collection('hero',ref => ref.where('id','==',id)).snapshotChanges()
-      .map(actions=>{
-      return actions.map(a=>{
-        const data = a.payload.doc.data() as Hero;
-        const id = a.payload.doc.id;
+    this.hero = this.afs.collection("hero").doc(""+id).snapshotChanges()
+    .map(a=>{
+        const data = a.payload.data() as Hero;
+        const id = a.payload.id;
         return {id, data};
       })
-    })
-    return this.heroes;
+    return this.hero;
   }
 
   addHero(hero:Hero){
-    this.HeroCollection.add({
+    this.HeroCollection.doc(""+hero.id).set({
       name : hero.name,
-      id : hero.id,
+      // id : hero.id,
       info: hero.info,
       img : hero.img
     });
@@ -65,7 +68,7 @@ export class HeroService {
   updateHero(hero){
     this.HeroCollection.doc(hero.id).set({
       name : hero.data.name,
-      id : hero.data.id,
+      // id : hero.data.id,
       info : hero.data.info,
       img : hero.data.img
     })
