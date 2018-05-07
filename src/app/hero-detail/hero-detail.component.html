@@ -14,9 +14,10 @@
         <input [(ngModel)]="hero.data.info" placeholder="info"/>
       </label>
 </div>
- <div>
+ <!-- <div>
       <label>Img:
         <input [(ngModel)]="hero.data.img" placeholder="imgURL"/>
       </label>
- </div>
+ </div> -->
+ <input type="file" (change)="startUpload($event.target.files)">
   <button (click)="goBack(hero)">go back</button>

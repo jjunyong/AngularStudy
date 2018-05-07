@@ -59,7 +59,6 @@ export class HeroService {
   addHero(hero:Hero){
     this.HeroCollection.doc(""+hero.id).set({
       name : hero.name,
-      // id : hero.id,
       info: hero.info,
       img : hero.img
     });
@@ -68,7 +67,6 @@ export class HeroService {
   updateHero(hero){
     this.HeroCollection.doc(hero.id).set({
       name : hero.data.name,
-      // id : hero.data.id,
       info : hero.data.info,
       img : hero.data.img
     })
