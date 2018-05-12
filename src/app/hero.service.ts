@@ -6,6 +6,7 @@ import { Hero } from './hero';
 import { MessageService } from './message.service';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import 'rxjs/add/operator/map'
+import { AuthService } from './core/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
@@ -21,7 +22,8 @@ export class HeroService {
 
   constructor(
     private afs: AngularFirestore,
-    private messageService: MessageService) { 
+    private messageService: MessageService,
+    private auth : AuthService) { 
       this.HeroCollection = afs.collection('hero');
     }
 
@@ -74,5 +76,12 @@ export class HeroService {
 
   deleteHero(hero){
     this.HeroCollection.doc(hero.id).delete();
+  }
+  
+  clickLike(h){
+    this.afs.collection('user').doc(""+ this.auth.afAuth.auth.currentUser.uid).collection('like').add({
+      hero : h.data.name,
+      date : new Date().toString()
+    })
   }
 }

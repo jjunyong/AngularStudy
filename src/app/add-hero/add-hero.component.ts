@@ -58,7 +58,8 @@ export class AddHeroComponent implements OnInit {
     }
 
     // Storage path
-    const path = `hero_image/${new Date().getTime()}_${file.name}`;
+    // const path = `hero_image/${new Date().getTime()}_${file.name}`;
+    const path = `hero_image/${file.name}`;
     const customMetadata = { app : 'My FinalExam web' }
     
     // Subscribe is not required it is automatic

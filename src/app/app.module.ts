@@ -19,6 +19,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage'
 import { AngularFireAuthModule } from 'angularfire2/auth'
 import { environment } from '../environments/environment';
 import { AddHeroComponent } from './add-hero/add-hero.component'
+import { CoreModule } from './core/core.module';
+import { MypageComponent } from './mypage/mypage.component';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import { AddHeroComponent } from './add-hero/add-hero.component'
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
+    CoreModule
   ],
   declarations: [
     AppComponent,
@@ -41,7 +44,8 @@ import { AddHeroComponent } from './add-hero/add-hero.component'
     HeroDetailComponent,
     MessagesComponent,
     LoginComponent,
-    AddHeroComponent
+    AddHeroComponent,
+    MypageComponent
   ],
   bootstrap: [ AppComponent ]
 })

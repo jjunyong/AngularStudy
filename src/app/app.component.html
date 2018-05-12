@@ -1,8 +1,21 @@
 <h1>{{title}}</h1>
-    <mat-toolbar class="toolbar" color="primary" >
+
+<!-- <div *ngIf="this.auth.user | async; then guest else authenticated"></div> -->
+
+<div *ngIf="this.auth.afAuth.authState  | async as user; else other">
+      <mat-toolbar class="toolbar" color="primary" >
             <a routerLink="/dashboard">Dashboard</a>
-            <!-- <a routerLink="/heroes">Heroes</a> -->
-            <a routerLink="/login">Login</a>
+            <a routerLink="/mypage">My Page</a>
+            <a routerLink="/dashboard" (click)="logout()">Logout</a>
       </mat-toolbar>  
+</div>
+
+<ng-template #other>
+      <mat-toolbar class="toolbar" color="primary" >
+                  <a routerLink="/dashboard">Dashboard</a>
+                  <a  routerLink="/login">Login</a>
+      </mat-toolbar>  
+</ng-template>  
+
 <router-outlet></router-outlet>
 <app-messages></app-messages>

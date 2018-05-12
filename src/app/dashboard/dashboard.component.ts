@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import {MatSnackBar} from '@angular/material';
+import { AuthService } from '../core/auth.service';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class DashboardComponent implements OnInit {
   heroes : any = [];
 
   constructor(private heroService: HeroService,
-              private snackBar : MatSnackBar) { }
+              private snackBar : MatSnackBar,
+              private auth : AuthService) { }
 
   ngOnInit() {
     this.getHeroes();
@@ -31,5 +33,9 @@ export class DashboardComponent implements OnInit {
     this.snackBar.open("Hero deleted","",{
       duration: 2000
     })
+  }
+
+  clickLike(hero){
+    this.heroService.clickLike(hero);
   }
 }
